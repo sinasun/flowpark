@@ -9,7 +9,6 @@ export default function Page({ params }: { params: { parking: string } }) {
 	const [slots, setSlots] = useState<
 		{ position: number; state: number; message: solace.Message | null }[]
 	>([
-		{ position: 0, state: 1, message: null },
 		{ position: 1, state: 1, message: null },
 		{ position: 2, state: 1, message: null },
 		{ position: 3, state: 1, message: null },
@@ -48,7 +47,7 @@ export default function Page({ params }: { params: { parking: string } }) {
 		var messageSubscriber = session.createMessageConsumer({
 			// solace.MessageConsumerProperties
 			queueDescriptor: {
-				name: 'test_queue',
+				name: 'queue_' + params.parking,
 				type: solace.QueueType.QUEUE,
 			},
 			acknowledgeMode: solace.MessageConsumerAcknowledgeMode.CLIENT, // Enabling Client ack
