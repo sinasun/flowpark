@@ -5,6 +5,7 @@ import { fontSans } from '@/config/fonts';
 import { Providers } from './providers';
 import { Navbar } from '@/components/navbar';
 import clsx from 'clsx';
+import { getServerSession } from 'next-auth/next';
 
 export const metadata: Metadata = {
 	title: {
@@ -26,11 +27,13 @@ export const viewport: Viewport = {
 	],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
+	const session = await getServerSession();
+
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head />
@@ -40,7 +43,10 @@ export default function RootLayout({
 					fontSans.variable
 				)}
 			>
-				<Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
+				<Providers
+					themeProps={{ attribute: 'class', defaultTheme: 'dark' }}
+					session={session}
+				>
 					<div className="relative flex flex-col h-screen">
 						<Navbar />
 						<main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
