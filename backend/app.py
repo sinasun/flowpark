@@ -74,6 +74,7 @@ def publish():
     publisher.publish(outbound_msg, Topic.of(topic))
     publisher.terminate()
     
+    messaging_service.disconnect()
     return "Published successfully!"
 
 if __name__ == '__main__':
