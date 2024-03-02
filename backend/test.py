@@ -8,7 +8,7 @@ from solace.messaging.messaging_service import MessagingService, ReconnectionLis
 from solace.messaging.publisher.persistent_message_publisher import PersistentMessagePublisher
 from solace.messaging.publisher.persistent_message_publisher import MessagePublishReceiptListener
 from solace.messaging.resources.topic import Topic
-TOPIC_PREFIX = "solace/samples/python"
+TOPIC_PREFIX = "test"
 
 class ServiceEventHandler(ReconnectionListener, ReconnectionAttemptListener, ServiceInterruptionListener):
     def on_reconnected(self, e: ServiceEvent):
@@ -67,7 +67,7 @@ receipt_listener = MessageReceiptListener()
 publisher.set_message_publish_receipt_listener(receipt_listener)
 
 # Prepare the destination topic
-topic = Topic.of(TOPIC_PREFIX + f'/persistent/pub')
+topic = Topic.of(TOPIC_PREFIX )
 
 # Prepare outbound message payload and body
 message_body = "this is the body of the msg"
