@@ -1,19 +1,27 @@
 'use client';
 import { useState } from 'react';
 import * as solace from 'solclientjs';
+interface Messages {
+	[position: number]: solace.Message; // Adjust the type as needed
+}
+
 export default function Page({ params }: { params: { parking: string } }) {
-	const [slots, setSlots] = useState([
-		{ position: 0, state: 1 },
-		{ position: 1, state: 1 },
-		{ position: 2, state: 1 },
-		{ position: 3, state: 1 },
-		{ position: 4, state: 1 },
-		{ position: 5, state: 1 },
-		{ position: 6, state: 1 },
-		{ position: 7, state: 1 },
-		{ position: 8, state: 1 },
-		{ position: 9, state: 1 },
+	const [slots, setSlots] = useState<
+		{ position: number; state: number; message: solace.Message | null }[]
+	>([
+		{ position: 0, state: 1, message: null },
+		{ position: 1, state: 1, message: null },
+		{ position: 2, state: 1, message: null },
+		{ position: 3, state: 1, message: null },
+		{ position: 4, state: 1, message: null },
+		{ position: 5, state: 1, message: null },
+		{ position: 6, state: 1, message: null },
+		{ position: 7, state: 1, message: null },
+		{ position: 8, state: 1, message: null },
+		{ position: 9, state: 1, message: null },
 	]);
+	const [messages, setMessages] = useState<Messages>({});
+
 	solace.SolclientFactory.init();
 	var session = solace.SolclientFactory.createSession({
 		url: 'ws://mr-connection-rh8ji61z3t2.messaging.solace.cloud:80',
@@ -58,31 +66,45 @@ export default function Page({ params }: { params: { parking: string } }) {
 		});
 		messageSubscriber.on(
 			solace.MessageConsumerEventName.MESSAGE,
-			function (message) {
-				const relevantPart = message
-					.getBinaryAttachment()
-					?.slice(-4)
-					.toString();
-				const numbers = relevantPart?.match(/(\d+):(\d+)/);
-
-				// Extracting the first and second numbers
+			async function (message) {
+				console.log('Message: ' + message.getBinaryAttachment());
+				const updateSlot = (
+					positionToUpdate: any,
+					newState: any,
+					newMessage: any
+				) => {
+					setSlots((prevSlots) => {
+						return prevSlots.map((slot) => {
+							if (slot.position === positionToUpdate) {
+								if (slot.message === null) {
+									// Set message to the current message
+									setMessages((prevMessages) => ({
+										...prevMessages,
+										[positionToUpdate]: newMessage,
+									}));
+								} else {
+									// Acknowledge the old message
+									const oldMessage = messages[positionToUpdate];
+									if (oldMessage && oldMessage !== null) {
+										oldMessage.acknowledge();
+									}
+									// Update the slot with the new message and state
+									setMessages((prevMessages) => ({
+										...prevMessages,
+										[positionToUpdate]: newMessage,
+									}));
+								}
+								return { ...slot, state: newState };
+							}
+							return slot;
+						});
+					});
+				};
+				const relevantPart = message.getBinaryAttachment()?.slice(-4);
+				const numbers = relevantPart?.toString().match(/(\d+):(\d+)/);
 				const positionToUpdate = parseInt(numbers![1], 10);
 				const newState = parseInt(numbers![2], 10);
-
-				// Updating the state based on extracted numbers
-				const updatedSlots = slots.map((slot) => {
-					if (slot.position === positionToUpdate) {
-						return { ...slot, state: newState };
-					} else {
-						return slot;
-					}
-				});
-
-				// Setting the updated state
-				setSlots(updatedSlots);
-
-				// Need to explicitly ack otherwise it will not be deleted from the message router
-				//message.acknowledge();
+				updateSlot(positionToUpdate, newState, message);
 			}
 		);
 
