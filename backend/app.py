@@ -72,6 +72,8 @@ def publish():
     outbound_msg = outbound_msg_builder \
                 .build(f'{message}')
     publisher.publish(outbound_msg, Topic.of(topic))
+    publisher.terminate()
+    
     return "Published successfully!"
 
 if __name__ == '__main__':
