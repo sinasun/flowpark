@@ -35,7 +35,6 @@ void setup() {
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
 
-  connect(client);
 }
 
 float get_distance() {
@@ -47,7 +46,7 @@ float get_distance() {
   Serial.print(inches);
   Serial.println(" inches");
 
-  delay(1000);
+  return inches;
 }
 
 void send_message(bool status) {
@@ -59,7 +58,7 @@ void send_message(bool status) {
   Serial.println(url);
 
   client.print("POST " + url + " HTTP/1.1\r\n");
-  client.print("Host: " + String(host) + "\r\n");
+  client.print("Host: " + String(host) + ":" + String(port) + "\r\n");
   client.print("Content-Type: application/json\r\n");
   client.print("Content-Length: ");
   client.print(postData.length());
@@ -81,10 +80,10 @@ void connect() {
 }
 
 bool check_parking_slot (float threshold = 10.0) {
-  distance = get_distance()
+  float distance = get_distance();
   if (previous_status == true && threshold < distance) {
     return true;
-  } else (previous_status == false && distance <= threshold) {
+  } else if (previous_status == false && distance <= threshold) {
     return true;
   }
   return false;
@@ -92,10 +91,11 @@ bool check_parking_slot (float threshold = 10.0) {
 
 void loop() {
   if (check_parking_slot()) {
+  	connect();
     send_message(!previous_status);
     previous_status = !previous_status;
   }
 
-  delay(5000); // Send request every 5 seconds
+  delay(100);
 }
 
