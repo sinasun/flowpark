@@ -1,17 +1,10 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client';
+import { NextRequest, NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
 
-export default async function handler(
-	req: NextApiRequest,
-	res: NextApiResponse
-) {
-	if (req.method !== 'POST') {
-		return res.status(405).json({ message: 'Method Not Allowed' });
-	}
-
-	const { name, position, status } = req.body;
+export async function POST(request: NextRequest) {
+	const { name, position, status } = await request.json();
 
 	try {
 		const updatedParking = await prisma.parking.update({
@@ -23,12 +16,11 @@ export default async function handler(
 			},
 		});
 
-		res.status(200).json({
+		NextResponse.json({
 			message: `Status updated for position ${position} of parking ${name}`,
 		});
 	} catch (error) {
 		console.error('Error updating status:', error);
-		res.status(500).json({ message: 'Internal Server Error' });
 	} finally {
 		await prisma.$disconnect();
 	}
