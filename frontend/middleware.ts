@@ -14,8 +14,7 @@ export default async function middleware(req: NextRequest) {
 		req,
 		secret: process.env.NEXTAUTH_SECRET,
 	});
-	const protectedList = ['/dashboard'];
-	const isProtected = protectedList.includes(path);
+	const isProtected = path.startsWith('/dashboard');
 
 	if (!session && isProtected) {
 		return NextResponse.redirect(new URL('/', req.url));
