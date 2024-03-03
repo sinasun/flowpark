@@ -1,16 +1,16 @@
+'use client'
 import { Link } from '@nextui-org/link';
 
-import { button as buttonStyles } from '@nextui-org/theme';
 import { Card, CardFooter, Image, Button } from '@nextui-org/react';
 
 export default function Dashboard() {
 	return (
-		<div className="flex flex-col">
+		<div className="flex flex-col lg:flex-row">
 			<div className="flex flex-row justify-around">
 				<Card isFooterBlurred radius="lg" className="border-none">
 					<Image
 						alt="Parking image"
-						className="object-cover p-2"
+						className="object-cover"
 						height={800}
 						src="/images/parking.jpg"
 						width={200}
@@ -31,10 +31,10 @@ export default function Dashboard() {
 					</CardFooter>
 				</Card>
 
-				<Card isFooterBlurred radius="lg" className="border-none">
+				<Card isFooterBlurred radius="lg" className="border-none ml-4 lg:mx-8">
 					<Image
 						alt="Parking image"
-						className="object-cover p-2"
+						className="object-cover"
 						height={800}
 						src="/images/parking.jpg"
 						width={200}
@@ -55,11 +55,11 @@ export default function Dashboard() {
 					</CardFooter>
 				</Card>
 			</div>
-			<div className="flex flex-row justify-around mt-10">
+			<div className="flex flex-row justify-around mt-10 lg:mt-0">
 				<Card isFooterBlurred radius="lg" className="border-none">
 					<Image
 						alt="Parking image"
-						className="object-cover p-2"
+						className="object-cover"
 						height={800}
 						src="/images/parking.jpg"
 						width={200}
@@ -80,10 +80,10 @@ export default function Dashboard() {
 					</CardFooter>
 				</Card>
 
-				<Card isFooterBlurred radius="lg" className="border-none">
+				<Card isFooterBlurred radius="lg" className="border-none ml-4 lg:mx-8">
 					<Image
 						alt="Parking image"
-						className="object-cover p-2"
+						className="object-cover"
 						height={800}
 						src="/images/parking.jpg"
 						width={200}
