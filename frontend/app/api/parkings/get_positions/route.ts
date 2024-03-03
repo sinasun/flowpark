@@ -7,7 +7,8 @@ import { NextRequest, NextResponse } from 'next/server';
 const prisma = new PrismaClient();
 
 export async function GET(request: NextRequest) {
-	const { name } = await request.json();
+	console.log(request.body);
+	const name = 'parking1';
 	await prisma.parking.createMany({
 		data: [
 			{
