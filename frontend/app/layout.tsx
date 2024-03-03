@@ -44,7 +44,7 @@ export default async function RootLayout({
 				)}
 			>
 				<Providers
-					themeProps={{ attribute: 'class', defaultTheme: 'dark' }}
+					themeProps={{ attribute: 'class', defaultTheme: 'light' }}
 					session={session}
 				>
 					<div className="relative flex flex-col h-screen">
