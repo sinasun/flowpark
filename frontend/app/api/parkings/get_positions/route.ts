@@ -62,6 +62,7 @@ export async function GET(request: NextRequest) {
 				name: name as string,
 			},
 			select: {
+				id: true,
 				position1: true,
 				position2: true,
 				position3: true,
