@@ -10,11 +10,30 @@ const Solution = () => {
         rising problem of parking in our busy society offering a cost effective
         implementation over the competition.
       </p>
+<<<<<<< HEAD
       <ul className="text-[18px] mb-4">
         <li>Utilizes advanced low-latency sonar range detection systems</li>
         <li>
           Assists cities, organizers, and drivers in addressing parking
           challenges
+=======
+      <ul className="text-[18px]">
+        <li className="mb-4">
+          <span className="font-bold">Wasted time and frustration:</span>{" "}
+          Drivers spend precious time searching for parking, increasing stress
+          and potentially impacting their schedules.
+        </li>
+        <li className="mb-4">
+          <span className="font-bold">Traffic congestion:</span> Circles
+          searching for parking contribute to traffic jams, further increasing
+          frustration and pollution.
+          
+        </li>
+        <li className="mb-4">
+          <span className="font-bold">Increased emissions:</span> Idling
+          vehicles searching for parking contribute to unnecessary emissions,
+          harming the environment.
+>>>>>>> 2b4e37af61e840378d5a8a832eb10efbde78612c
         </li>
         <li>Provides real-time parking information</li>
         <li>Offers a cost-effective solution compared to competitors</li>
