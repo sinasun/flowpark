@@ -39,8 +39,8 @@ const About = () => {
 					</h1>
 					<p className="text-lg">
 						You can easily switch between different parkings, to see which one
-						has an available spot. You're not only limited to one location, but
-						all parkings around the town.
+						has an available spot. You&apos;re not only limited to one location,
+						but all parkings around the town.
 					</p>
 				</div>
 				<Image
