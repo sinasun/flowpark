@@ -16,11 +16,11 @@ const About = () => {
 						Get Notified in Seconds
 					</h1>
 					<p className="text-lg">
-						Park Spotter is sonar based application that provides precise
+						Flow Park is sonar based application that provides precise
 						monitoring of parking availability and real-time vehicle detection,
-						improving the parking experience. Park Spotter makes it possible to
+						improving the parking experience. Flow Park makes it possible to
 						identify open spots in real time, which cuts down on distress and
-						search time while also possibly saving fuel use. Park Spotter
+						search time while also possibly saving fuel use. Flow Park 
 						provides regular drivers with an easy and effective parking
 						solution, whether they are navigating busy parking lots or city
 						streets.

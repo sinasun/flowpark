@@ -6,9 +6,9 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
 
-export async function GET(request: NextRequest) {
-	console.log(request.body);
-	const name = 'parking1';
+export async function POST(request: NextRequest) {
+	const { name } = await request.json();
+	console.log(name);
 	await prisma.parking.createMany({
 		data: [
 			{

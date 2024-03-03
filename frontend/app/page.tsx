@@ -58,7 +58,7 @@ export default function Home() {
       <div className="flex flex-col text-center justify-center">
         <TypewriterEffectSmooth words={words} />
         <p className="mt-4">
-          <strong>Park Spotter</strong> provides real-time data about parking
+          <strong>Flow Park</strong> provides real-time data about parking
           spot around you.
         </p>
       </div>
