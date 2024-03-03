@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-	name: 'Park Spoter',
+	name: 'Flow Park',
 	description: 'UottawaHack.',
 	navItems: [
 		{
