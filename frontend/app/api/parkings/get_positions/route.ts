@@ -57,7 +57,7 @@ export async function GET(request: NextRequest) {
 		],
 	});
 	try {
-		const parking = await prisma.parking.findUnique({
+		const parking = await prisma.parking.findFirst({
 			where: {
 				name: name as string,
 			},
