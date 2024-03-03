@@ -54,7 +54,7 @@ model VerificationToken {
 
 model Parking {
     id        Int    @id @default(autoincrement())
-    name      String
+    name      String @unique
     position1 Int
     position2 Int
     position3 Int

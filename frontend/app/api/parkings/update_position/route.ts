@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
 	try {
 		const updatedParking = await prisma.parking.update({
 			where: {
-				name: name as string,
+				name: name,
 			},
 			data: {
 				[getPositionColumn(position)]: status as number,
