@@ -25,6 +25,7 @@ const Statement = () => {
           <span className="font-bold">Traffic congestion:</span> Circles
           searching for parking contribute to traffic jams, further increasing
           frustration and pollution.
+          
         </li>
         <li className="mb-4">
           <span className="font-bold">Increased emissions:</span> Idling
