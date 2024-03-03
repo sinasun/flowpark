@@ -73,6 +73,9 @@ export async function GET(request: NextRequest) {
 				position8: true,
 			},
 		});
+		if (!parking) {
+			return;
+		}
 
 		// Extracting position values into an array
 		const positionValues = Object.values(parking);
