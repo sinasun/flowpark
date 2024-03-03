@@ -19,7 +19,7 @@ export default function Page({ params }: { params: { parking: string } }) {
 	useEffect(() => {
 		solace.SolclientFactory.init();
 		var session = solace.SolclientFactory.createSession({
-			url: 'ws://mr-connection-rh8ji61z3t2.messaging.solace.cloud:443',
+			url: 'wss://mr-connection-rh8ji61z3t2.messaging.solace.cloud:443',
 			vpnName: 'parking-spotter',
 			userName: 'solace-cloud-client',
 			password: 'npkndudi22g548rfdcdto67dsq',
